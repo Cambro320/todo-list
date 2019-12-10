@@ -12,7 +12,24 @@ var ul = document.querySelector("ul"); // to append li to it
 var list_li = document.querySelectorAll("li");
 var delButton = document.getElementsByClassName("delete");
 
-// refactoring: make code better by using functions to abstract repetitive code blocks
+
+// Add click listener to current li 
+for (var i = 0; i < list_li.length; i++) {
+  list_li[i].addEventListener("click", toggleLiClass);
+}
+
+// Add click listener to current delete button 
+for(var i = 0; i < delButton.length; i++){
+	delButton[i].addEventListener("click", delParent);
+}
+
+// refactoring: using functions to abstract repetitive code blocks
+
+//Delete li after delete button clicked
+function delParent(action) {
+  action.target.parentNode.remove();
+}
+
 function inputLength() {
   return input.value.length; // check if input is blank
 }
@@ -20,10 +37,12 @@ function inputLength() {
 function createListElement() {
   var li = document.createElement("li"); 
   var addButton = document.createElement("button");
+  addButton.classList.add("delete");
   addButton.innerHTML = "X";
+  addButton.addEventListener("click", delParent);
 
   li.appendChild(document.createTextNode(input.value.charAt(0).toUpperCase() + input.value.slice(1))); //capitalize and add delete button    
-  li.innerHTML = li.innerHTML + "----";
+  li.innerHTML = li.innerHTML + "----";  
   li.appendChild(addButton);
   li.addEventListener("click", toggleLiClass);
   ul.appendChild(li); 
@@ -46,16 +65,7 @@ function toggleLiClass() {
   this.classList.toggle("done");
 }
 
-function addLiEventListener(){
-  for (var i = 0; i < list_li.length; i++) {
-    list_li[i].addEventListener("click", toggleLiClass);
-  };
-}
-
-addLiEventListener()
-
 button.addEventListener("click", addListAfterClick);
-
 input.addEventListener("keypress", addListAfterKeypress);
 
 // Original blocks of code:
