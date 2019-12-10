@@ -6,7 +6,7 @@
 
 // cache get elements/queried selectors into variables
 var button = document.getElementById("enter");
-var input = document.getElementById("userinput");
+var input = document.getElementById("userinput"); 
 
 var ul = document.querySelector("ul"); // to append li to it 
 var list_li = document.querySelectorAll("li");
